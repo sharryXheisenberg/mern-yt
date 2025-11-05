@@ -1,0 +1,17 @@
+{
+  "name": "day-1",
+  "version": "1.0.0",
+  "description": "Day - 1 learning MERN from YT",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "node index.js"
+  },
+  "keywords": [
+    "modules",
+    "require",
+    "fs"
+  ],
+  "author": "Saurabh Pande",
+  "license": "MIT"
+}
