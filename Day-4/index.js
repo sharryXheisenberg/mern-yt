@@ -1,6 +1,7 @@
 const http = require("http");
 const fs= require("fs");
 const path = require("path");
+const {Transform , pipeline} = require("stream");
 
 
 const server = http.createServer((req,res)=>{
@@ -45,25 +46,36 @@ const server = http.createServer((req,res)=>{
 // replace epsum words to saurabh
 const readStreamNew = fs.createReadStream(path.join(__dirname,"sample.txt"));
 const writeStreamNew = fs.createWriteStream(path.join(__dirname,"output.txt"));
+const transformStream = new Transform({
+    transform(chunk,encoding,callback){
+        const modifiedWords = chunk.toString().toUpperCase().replaceAll(/ipsum/gi , "Saurabh");
+        callback(null,modifiedWords);
+    }
+})
 
+readStreamNew.pipe(transformStream).pipe(writeStreamNew);
+// pipeline(readStreamNew,transformStream,pipeline , (err)=>{
+//     console.log(err);
+// })
+
+res.end();
 
 // bad approach 
 
 
-readStreamNew.on("data",(chunk)=>{
-    const modifiedWords = chunk.toString().toUpperCase().replaceAll(/ipsum/gi , "Saurabh");
-    writeStreamNew.write(modifiedWords);
-});
+// readStreamNew.on("data",(chunk)=>{
+//     const modifiedWords = chunk.toString().toUpperCase().replaceAll(/ipsum/gi , "Saurabh");
+//     writeStreamNew.write(modifiedWords);
+// });
 
-readStreamNew.on("end",()=>{
-    writeStreamNew.end();
-    res.end("file processed!");
-});
-readStreamNew.on("error", (err) => {
-        console.error("Read error:", err);
-        res.end("Error reading file!");
-    });
-
+// readStreamNew.on("end",()=>{
+//     writeStreamNew.end();
+//     res.end("file processed!");
+// });
+// readStreamNew.on("error", (err) => {
+//         console.error("Read error:", err);
+//         res.end("Error reading file!");
+//     });
 
 
 });
@@ -73,6 +85,8 @@ server.listen(8000,()=>{
     console.log("Server is concentrated at ", 8000);
 });
 
+
+// transform stream is readble and writeable 
 
 
 
