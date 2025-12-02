@@ -3,6 +3,7 @@ import {data} from "./Data/data.js";
 // import { use } from "react";
 const app = express();
 const PORT = 8080;
+app.use(express.json());  // middleware to parse the POST data
 
 
 // *1.GET request(it is for feteching data from server)
@@ -32,6 +33,54 @@ app.get("/api/v1/users/:id",(req,res)=>{   // here /:id tells about dynamic rout
     const user = data.find((user)=> user.id === profileId);
     res.status(200).send(user);
 })
+
+
+// *2 . POST request (it is for posting data)
+
+app.post("/api/v1/users",(req,res)=>{
+    console.log(req.body);
+    const {name,displayname} = req.body;   // body because we are using post request 
+
+    const newUser = {     // this thing will be add to the data.js 
+        id:data.length+1,
+        name,
+        displayname
+    };
+    data.push(newUser);
+    res.status(201).send(
+        {
+            message:"User created ",
+            data:newUser
+        }
+    );
+})
+
+//*3  PUT request (for updating the data ||  UPDATE it all fields) 
+app.put("/api/v1/users/:id", (req,res)=>{
+    const {
+        body , 
+        params:{id},
+    }=req;
+
+    const parseID = parseInt(id);
+    const userIndex = data.findIndex((user)=>user.id === parseID);
+    if(userIndex === -1){
+        res.status(404).send("User not found");
+    }
+    data[userIndex] = {
+        id:parseID,
+        ...body
+    }
+    res.status(201).send({
+        message:"User updated successfully ",
+        data:data[userIndex]
+    });
+})
+
+
+//*4 PATCH request for updating the specific field
+
+
 
 
 app.listen(PORT, (req,res)=>{
