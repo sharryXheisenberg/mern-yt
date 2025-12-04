@@ -47,6 +47,7 @@ app.post("/api/v1/users",(req,res)=>{
         displayname
     };
     data.push(newUser);
+    
     res.status(201).send(
         {
             message:"User created ",
@@ -80,7 +81,47 @@ app.put("/api/v1/users/:id", (req,res)=>{
 
 //*4 PATCH request for updating the specific field
 
+app.patch("/api/v1/users/:id", (req,res)=>{
+    const {
+        body , 
+        params:{id},
+    }=req;
 
+    const parseID = parseInt(id);
+    const userIndex = data.findIndex((user)=>user.id === parseID);
+    if(userIndex === -1){
+        res.status(404).send("User not found");
+    }
+    data[userIndex] = {
+        ...data[userIndex], ...body
+    }
+    res.status(201).send({
+        message:"User updated successfully ",
+        data:data[userIndex]
+    });
+})
+
+
+// *5 DELETE request(it is for deleting the user)  (assignment)
+// *5 DELETE request (Corrected)
+// Notice the added '/:id' in the route path
+app.delete("/api/v1/users/:id", (req, res) => {
+        const { id } = req.params;
+    const parseID = parseInt(id);
+
+    const userIdx = data.findIndex((user) => user.id === parseID);
+
+    if (userIdx === -1) {
+        return res.status(404).send({ message: "User not found!" }); 
+    }
+
+    const deletedUser = data.splice(userIdx, 1);    //here splice is used for deleting the value from the array
+
+    res.status(200).send({
+        message: "User deleted successfully",
+        deletedUser: deletedUser[0] 
+    });
+});
 
 
 app.listen(PORT, (req,res)=>{
