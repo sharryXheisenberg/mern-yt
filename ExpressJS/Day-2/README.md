@@ -10,3 +10,6 @@
  - 1) Global middleware
  - 2) specific routes middleware 
  - 3) Inbuilt middleware 
+  
+##### **Global Middleware** 
+- It is only applicable to routes and method defined after global middleware defintion
