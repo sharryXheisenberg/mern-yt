@@ -1,5 +1,7 @@
 import express from "express";
+import userRouter from "./routers/user.routes.js";  // when we need to take {userRouter} symbol and userRouter without {} braces
 const app = express();
+app.use("/api/v1/users",userRouter);
 
 app.use(express.json());
 const PORT = 8080;
@@ -8,17 +10,6 @@ app.use("/",(req,res)=>{
     res.send("Hello wordl!");
 })
 
-app.use("/create-user",(req,res)=>{
-    res.send("Users page");
-})
-
-app.use("/getAllUsers",(req,res)=>{
-    res.send("Get all users");
-});
-
-app.use("/getUserById",(req,res)=>{
-    res.send("Get user by Id");
-});
 
 
 
