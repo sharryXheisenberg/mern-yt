@@ -2,6 +2,7 @@ import express from 'express';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';    // 
+import { generateToken } from '../utils/token.utils.js';
 
 
 const router = express.Router();
@@ -10,7 +11,7 @@ const router = express.Router();
 
 
 router.get("/generate-token",(req,res)=>{
-    const token = "token";
+    const token = generateToken();
     res.status(200).send({
         message:"Token generated please save this token for future purpose",
         token : token
