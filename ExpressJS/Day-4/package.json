@@ -1,0 +1,16 @@
+{
+  "name": "day-4",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "expres": "^0.0.5",
+    "express": "^5.2.1"
+  }
+}
