@@ -19,3 +19,20 @@
 
 
 
+
+### **Learnings** 
+- **`Cookie-parser`:** parses the cookie header  on incoming HTTP requests and populates req.cookies (for unsigned cookies) and req.signedCookies (for signed cookies).
+
+``` bash
+req.cookieParser("string" || array of string)
+
+```
+here cookieParser uses the parameter string or arrays to create HMAC key  which enables parsing of signed cookies . Signed cookies are not encrypted - they are the original value plus an HMAC signature to the server can detect tampering.
+
+**When to pass it / types allowed:**
+- No argument: cookieParser() — you get req.cookies only, for unsigned cookies.
+- Single string: cookieParser('mySecret') — enables req.signedCookies.
+Array of strings: cookieParser(['key1','key2']) — useful for key rotation (old keys still verify).
+- Best practice: use a long random secret stored in an environment variable (e.g., process.env.COOKIE_SECRET).
+
+
