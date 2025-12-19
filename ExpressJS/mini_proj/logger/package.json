@@ -1,0 +1,18 @@
+{
+  
+  "name": "mini_proj",
+  "version": "1.0.0",
+  "description": "- Authentication of users to make access of private and public files and create logs folder to store the user logs",
+  "main": "server.js",
+  "devDependencies": {},
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "type":"module",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
