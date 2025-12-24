@@ -1,6 +1,6 @@
-export const authMiddleware = (req,res)=>{
-    if(req.session && res.session.user){   // session is there and in that session user is present not null value 
-        return next(); //m it goes to the next middleware  
+export const authMiddleware = (req, res, next) => {
+    if (req.session && req.session.user != null) {
+        return next();
     }
-    res.status(401).json({message:"Unauthorized: please logIn"})
+    return res.status(401).json({ message: "Unauthorized: please logIn" });
 }
