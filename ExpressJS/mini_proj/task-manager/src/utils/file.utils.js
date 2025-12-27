@@ -8,10 +8,10 @@ const __dirname = path.dirname(__filename);
 
 const filePath = path.join(__dirname,"data","tasks.json");
 
-export const readTask = () =>{
+export const readTask = async () =>{
     try{
         ensureFileExists();
-        const data = fs.readFileSync(filePath,"utf-8");
+        const data = await fs.promises.readFile(filePath, "utf-8");
         return JSON.parse(data || "[]");
     }catch(error){
         console.error("Error reading tasks: ",error);
@@ -19,11 +19,12 @@ export const readTask = () =>{
     }
 };
 
-export const writeTask = () =>{
+export const writeTask = async (tasks) =>{
     try{
-        fs.writeFileSync(filePath,JSON.stringify(tasks,null,2),"utf-8");
+        await fs.promises.writeFile(filePath, JSON.stringify(tasks, null, 2), "utf-8");
     }catch(error){
-        console.error("Error writing tasks ",error)
+        console.error("Error writing tasks ",error);
+        throw error;
     }
 };
 
