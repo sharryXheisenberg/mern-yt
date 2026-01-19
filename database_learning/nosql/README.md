@@ -8,7 +8,7 @@ allowing for faster and more applications . MongoDB is document-oriented and sto
 - Replication
 - Indexing
 
-#### **Difference between MongoDB and SQL 
+#### **Difference between MongoDB and SQL**
 - SQL-> tables
   MongoDB-> collection
 
@@ -21,7 +21,7 @@ allowing for faster and more applications . MongoDB is document-oriented and sto
 - SQL -> Fixed(Int, char , Date , etc.)
   MongoDB -> Flexible (String , number , Array , etc.)
 
-## **MongoDB terminologies
+## **MongoDB terminologies**
 
 **1.Database**
 A mongoDB database holds collections of documents it is a similar to SQL systems
@@ -46,7 +46,14 @@ Example:
 ## **How mongoDB works**
 MongoDB stores data in a binary format called BSON(binary JSON) . When a document is inserted into MongoDB it is converted into BSON , allowing for faster more efficient data retrieval 
 
-## **
+### **JSON vs BSON**
+- **JSON (JavaScript Object notation)**:- it is a lightweight data format for storing and exchanging data , usually in text format 
+  and also it supports for strings
+
+- **BSON (Binary JSON)**:- it is a binary encoded format for JSON like data .  It extends JSON to support additional data types 
+ like ObjectId , and allows for faster encoding and decoding . 
+
+
 
 
 
